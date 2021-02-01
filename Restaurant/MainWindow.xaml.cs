@@ -99,11 +99,13 @@ namespace Restaurant
                 }
                 cooked = true;
 
-                var chikensCook = 0;
-                var eggsCook = 0;
-                Drinks? drink = null;
                 for (int i = 0; i < 8; i++)
                 {
+
+
+                    var chikensCook = 0;
+                    var eggsCook = 0;
+                    Drinks? drink = null;
                     for (int j = 0; j < items[i].Length; j++)
                     {
                         if (items[i][j] is EggOrder)
