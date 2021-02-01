@@ -1,0 +1,30 @@
+F:\Restaurant\Restaurant\obj\Debug\Restaurant.csprojAssemblyReference.cache
+F:\Restaurant\Restaurant\obj\Debug\MainWindow.g.cs
+F:\Restaurant\Restaurant\obj\Debug\App.g.cs
+F:\Restaurant\Restaurant\obj\Debug\Restaurant_MarkupCompile.cache
+F:\Restaurant\Restaurant\obj\Debug\Restaurant_MarkupCompile.lref
+F:\Restaurant\Restaurant\bin\Debug\Restaurant.exe.config
+F:\Restaurant\Restaurant\bin\Debug\Restaurant.exe
+F:\Restaurant\Restaurant\bin\Debug\Restaurant.pdb
+F:\Restaurant\Restaurant\obj\Debug\MainWindow.baml
+F:\Restaurant\Restaurant\obj\Debug\Restaurant.g.resources
+F:\Restaurant\Restaurant\obj\Debug\Restaurant.Properties.Resources.resources
+F:\Restaurant\Restaurant\obj\Debug\Restaurant.csproj.GenerateResource.cache
+F:\Restaurant\Restaurant\obj\Debug\Restaurant.csproj.CoreCompileInputs.cache
+F:\Restaurant\Restaurant\obj\Debug\Restaurant.exe
+F:\Restaurant\Restaurant\obj\Debug\Restaurant.pdb
+F:\Restaurant 2\Restaurant\bin\Debug\Restaurant.exe.config
+F:\Restaurant 2\Restaurant\bin\Debug\Restaurant.exe
+F:\Restaurant 2\Restaurant\bin\Debug\Restaurant.pdb
+F:\Restaurant 2\Restaurant\obj\Debug\Restaurant.csprojAssemblyReference.cache
+F:\Restaurant 2\Restaurant\obj\Debug\MainWindow.g.cs
+F:\Restaurant 2\Restaurant\obj\Debug\App.g.cs
+F:\Restaurant 2\Restaurant\obj\Debug\Restaurant_MarkupCompile.cache
+F:\Restaurant 2\Restaurant\obj\Debug\Restaurant_MarkupCompile.lref
+F:\Restaurant 2\Restaurant\obj\Debug\MainWindow.baml
+F:\Restaurant 2\Restaurant\obj\Debug\Restaurant.g.resources
+F:\Restaurant 2\Restaurant\obj\Debug\Restaurant.Properties.Resources.resources
+F:\Restaurant 2\Restaurant\obj\Debug\Restaurant.csproj.GenerateResource.cache
+F:\Restaurant 2\Restaurant\obj\Debug\Restaurant.csproj.CoreCompileInputs.cache
+F:\Restaurant 2\Restaurant\obj\Debug\Restaurant.exe
+F:\Restaurant 2\Restaurant\obj\Debug\Restaurant.pdb
