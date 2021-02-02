@@ -1,4 +1,5 @@
-﻿using Restaurant.Moels;
+﻿using Restaurant.Models;
+using Restaurant.Moels;
 using System;
 using System.Windows;
 
@@ -9,12 +10,7 @@ namespace Restaurant
     /// </summary>
     public partial class MainWindow : Window
     {
-        Employee Employee = new Employee();
-        object[][] items = new object[8][];
-        int customerIndex = 0;
-        string[] cookResults = new string[8];
-        Boolean cooked = false;
-        Boolean served = false;
+        Server Server = new Server();
         public MainWindow()
         {
             InitializeComponent();
@@ -26,12 +22,8 @@ namespace Restaurant
 
         private void getOrder_Click(object sender, RoutedEventArgs e)
         {
-            int j = 0;
             try
             {
-                if (customerIndex == 8) {
-                    throw new Exception("All customers already gave you orders!");
-                }
                 var quantityChicken = int.Parse(chickenQuantity.Text);
 
                 if (quantityChicken < 0)
@@ -46,42 +38,9 @@ namespace Restaurant
                     throw new Exception("Quantity can't to be less 0!");
                 }
 
-                var drink = drinks.SelectedItem;
-                var ordersCount = quantityChicken + quantityEgg;
-                if (drink != null)
-                {
-                    ordersCount++;
-                }
-                items[customerIndex] = new object[ordersCount];
-                if (quantityChicken > 0)
-                {
-                    var chiken = new ChickenOrder(quantityChicken);
-                    while (j < quantityChicken)
-                    {
-                        items[customerIndex][j] = chiken;
-                        j++;
-                    }
-                }
+                var drink = (Drinks)drinks.SelectedItem;
 
-                if (quantityEgg > 0)
-                {
-                    var egg = new EggOrder(quantityEgg);
-
-                    eggQuality.Content = $"Egg Quality: {egg.GetQuality()}";
-
-                    while (j < quantityChicken + quantityEgg)
-                    {
-                        items[customerIndex][j] = egg;
-                        j++;
-                    }
-                }
-
-                if (drink != null)
-                {
-                    items[customerIndex][j] = drink;
-                }
-
-                customerIndex++;
+                Server.Receive(quantityChicken, quantityEgg, drink);
             }
             catch(Exception ex)
             {
@@ -93,52 +52,7 @@ namespace Restaurant
         {
             try
             {
-                if (cooked)
-                {
-                    throw new Exception("Already cooked!");
-                }
-                cooked = true;
-
-                for (int i = 0; i < 8; i++)
-                {
-
-
-                    var chikensCook = 0;
-                    var eggsCook = 0;
-                    Drinks? drink = null;
-                    for (int j = 0; j < items[i].Length; j++)
-                    {
-                        if (items[i][j] is EggOrder)
-                        {
-                            var egg = (EggOrder)items[i][j];
-                            if (egg.GetQuality() < 25)
-                            {
-                                break;
-                            }
-                            Employee.PrepareFood(egg);
-                            eggsCook = egg.GetQuantity();
-                        }
-                        if (items[i][j] is ChickenOrder)
-                        {
-                            var chicken = (ChickenOrder)items[i][j];
-                            Employee.PrepareFood(chicken);
-                            chikensCook = chicken.GetQuantity();
-                        }
-                        if (items[i][j] is Drinks)
-                        {
-                            drink = (Drinks)items[i][j];
-                        }
-                    }
-                    cookResults[i] = $"Customer {i} is served {chikensCook} chicken, {eggsCook} egg, ";
-                    if (drink == null)
-                    {
-                        cookResults[i] += "no drinks";
-                    }
-                    else
-                    {
-                        cookResults[i] += $"{drink}";
-                    }
-                }
+                Server.SendToCook();
             }
             catch(Exception ex)
             {
@@ -148,24 +62,19 @@ namespace Restaurant
 
         private void Serve_Click(object sender, RoutedEventArgs e)
         {
-            if(served)
+            try
             {
-                Results.Items.Add("Already served!");
-                return;
+                var resultOfCooks = Server.Serve();
+                for (int i = 0; i < resultOfCooks.Length; i++)
+                {
+                    Results.Items.Add(resultOfCooks[i]);
+                }
+                Results.Items.Add("Please enjoy your food!");
             }
-            served = true;
-            for(int i = 0; i < 8; i++)
+            catch(Exception ex)
             {
-                Results.Items.Add(cookResults[i]);
+                Results.Items.Add(ex.Message);
             }
-            Results.Items.Add("Please enjoy your food!");
         }
-    }
-    enum Drinks : short
-    {
-        Tea,
-        Juice,
-        RC_Cola,
-        Coca_Cola
     }
 }

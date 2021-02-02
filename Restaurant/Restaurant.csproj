@@ -70,9 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ChickenOrder.cs" />
+    <Compile Include="Models\Cook.cs" />
     <Compile Include="Models\EggOrder.cs" />
-    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,34 +1,33 @@
-﻿using System;
+﻿using Restaurant.Moels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaurant.Moels
+namespace Restaurant.Models
 {
-    public class Employee
+    public class Cook
     {
-        public Employee()
+        private object order;
+        public void SubmitRequest(int quantity, OrderTypes type)
         {
-
-        }
-
-        public string Inspect(object o)
-        {
-            if (o is EggOrder)
+            if (type == OrderTypes.Chicken)
             {
-                EggOrder e = (EggOrder)o;
-                return e.GetQuality().ToString();
+                order = new ChickenOrder(quantity);
             }
-            return "specifies no inspection is required";
+            else
+            {
+                order = new EggOrder(quantity);
+            }
         }
 
-        public string PrepareFood(object o)
+        public string PrepareFood()
         {
-            if (o is ChickenOrder)
+            if (order is ChickenOrder)
             {
 
-                ChickenOrder c = (ChickenOrder)o;
+                ChickenOrder c = (ChickenOrder)order;
                 for (int i = 0; i < c.GetQuantity(); i++)
                 {
                     c.CutUp();
@@ -36,10 +35,10 @@ namespace Restaurant.Moels
                 c.Cook();
                 return "indicating preparation has been completed";
             }
-            else if (o is EggOrder)
+            else if (order is EggOrder)
             {
                 var rotten = 0;
-                EggOrder e = (EggOrder)o;
+                EggOrder e = (EggOrder)order;
                 for (int i = 0; i < e.GetQuantity(); i++)
                 {
                     try
