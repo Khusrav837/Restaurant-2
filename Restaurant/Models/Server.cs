@@ -1,5 +1,6 @@
 ﻿
 
+using Restaurant.Moels;
 using System;
 
 namespace Restaurant.Models
@@ -89,8 +90,15 @@ namespace Restaurant.Models
                 }
                 cook.SubmitRequest(chicken, OrderTypes.Chicken);
                 cook.PrepareFood();
-                cook.SubmitRequest(egg, OrderTypes.Egg);
-                cook.PrepareFood();
+                var eggOrder = (EggOrder)cook.SubmitRequest(egg, OrderTypes.Egg);
+                if (eggOrder.GetQuality() > 25)
+                {
+                    cook.PrepareFood();
+                }
+                else
+                {
+                    egg = 0;
+                }
                 resultOfCooks[i] = $"Customer {i} is served {chicken} chicken, {egg} egg, ";
                 if (drink == null)
                 {

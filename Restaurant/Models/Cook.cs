@@ -10,7 +10,7 @@ namespace Restaurant.Models
     public class Cook
     {
         private object order;
-        public void SubmitRequest(int quantity, OrderTypes type)
+        public object SubmitRequest(int quantity, OrderTypes type)
         {
             if (type == OrderTypes.Chicken)
             {
@@ -20,6 +20,7 @@ namespace Restaurant.Models
             {
                 order = new EggOrder(quantity);
             }
+            return order;
         }
 
         public string PrepareFood()
