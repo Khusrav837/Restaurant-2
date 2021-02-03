@@ -55,6 +55,10 @@ namespace Restaurant.Models
 
         public EggOrder SendToCook()
         {
+            if (customerIndex == 0)
+            {
+                throw new Exception("You didn't ger orders of customers!");
+            }
             if (sendedToCook)
             {
                 throw new Exception("You already cooked!");
