@@ -53,7 +53,7 @@ namespace Restaurant.Models
                 customerIndex++;
         }
 
-        public void SendToCook()
+        public EggOrder SendToCook()
         {
             if (sendedToCook)
             {
@@ -61,10 +61,12 @@ namespace Restaurant.Models
             }
             sendedToCook = true;
             resultOfCooks = new string[8];
-            for(int i = 0; i < customerIndex; i++)
+            var chicken = 0;
+            var egg = 0;
+            for (int i = 0; i < customerIndex; i++)
             {
-                var chicken = 0;
-                var egg = 0;
+                var chickenCount = 0;
+                var eggCount = 0;
                 Drinks? drink = null;
                 for (int j = 0; j < items[i].Length; j++)
                 {
@@ -73,10 +75,12 @@ namespace Restaurant.Models
                         if((OrderTypes)items[i][j] == OrderTypes.Chicken)
                         {
                             chicken++;
+                            chickenCount++;
                         }
                         else
                         {
                             egg++;
+                            eggCount++;
                         }
                     }
                     else
@@ -84,11 +88,7 @@ namespace Restaurant.Models
                         drink = (Drinks)items[i][j];
                     }
                 }
-                cook.SubmitRequest(chicken, OrderTypes.Chicken);
-                cook.PrepareFood();
-                cook.SubmitRequest(egg, OrderTypes.Egg);
-                cook.PrepareFood();
-                resultOfCooks[i] = $"Customer {i} is served {chicken} chicken, {egg} egg, ";
+                resultOfCooks[i] = $"Customer {i} is served {chickenCount} chicken, {eggCount} egg, ";
                 if (drink == null)
                 {
                     resultOfCooks[i] += "no drinks";
@@ -98,6 +98,12 @@ namespace Restaurant.Models
                     resultOfCooks[i] += $"{drink}";
                 }
             }
+
+            cook.SubmitRequest(chicken, OrderTypes.Chicken);
+            cook.PrepareFood();
+            var eggOrder = (EggOrder)cook.SubmitRequest(egg, OrderTypes.Egg);
+            cook.PrepareFood();
+            return eggOrder;
         }
 
         public string[] Serve()
