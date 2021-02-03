@@ -15,7 +15,7 @@ namespace Restaurant.Models
 
         protected int Quantity;
 
-        public void Cook() { }
+        public virtual void Cook() { }
 
         public int GetQuantity()
         {

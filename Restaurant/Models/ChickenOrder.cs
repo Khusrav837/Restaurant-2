@@ -13,6 +13,11 @@ namespace Restaurant.Moels
         {
         }
 
+        public override void Cook()
+        {
+            base.Cook();
+        }
+
         public void CutUp() { }
     }
 }

@@ -38,7 +38,7 @@ namespace Restaurant
                     throw new Exception("Quantity can't to be less 0!");
                 }
 
-                var drink = (Drinks)drinks.SelectedItem;
+                var drink = drinks.SelectedItem;
 
                 Server.Receive(quantityChicken, quantityEgg, drink);
             }
@@ -52,7 +52,8 @@ namespace Restaurant
         {
             try
             {
-                Server.SendToCook();
+                var egg = Server.SendToCook();
+                eggQuality.Content = $"Egg Quality: {egg.GetQuality()}";
             }
             catch(Exception ex)
             {

@@ -20,7 +20,7 @@ namespace Restaurant.Models
             cook = new Cook();
         }
 
-        public void Receive(int chickenQuantity, int eggQuantity, Drinks? drink)
+        public void Receive(int chickenQuantity, int eggQuantity, object drink)
         {
             int j = 0;
                 if (customerIndex == 8)
@@ -55,22 +55,18 @@ namespace Restaurant.Models
 
         public void SendToCook()
         {
-            if (customerIndex < 8)
-            {
-                throw new Exception("You didn't get order of customers!");
-            }
             if (sendedToCook)
             {
                 throw new Exception("You already cooked!");
             }
             sendedToCook = true;
             resultOfCooks = new string[8];
-            var chicken = 0;
-            var egg = 0;
-            Drinks? drink = null;
-            for(int i = 0; i < 8; i++)
+            for(int i = 0; i < customerIndex; i++)
             {
-                for(int j = 0; j < items[i].Length; j++)
+                var chicken = 0;
+                var egg = 0;
+                Drinks? drink = null;
+                for (int j = 0; j < items[i].Length; j++)
                 {
                     if (items[i][j] is OrderTypes)
                     {
@@ -90,15 +86,8 @@ namespace Restaurant.Models
                 }
                 cook.SubmitRequest(chicken, OrderTypes.Chicken);
                 cook.PrepareFood();
-                var eggOrder = (EggOrder)cook.SubmitRequest(egg, OrderTypes.Egg);
-                if (eggOrder.GetQuality() > 25)
-                {
-                    cook.PrepareFood();
-                }
-                else
-                {
-                    egg = 0;
-                }
+                cook.SubmitRequest(egg, OrderTypes.Egg);
+                cook.PrepareFood();
                 resultOfCooks[i] = $"Customer {i} is served {chicken} chicken, {egg} egg, ";
                 if (drink == null)
                 {
